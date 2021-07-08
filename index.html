@@ -13,8 +13,21 @@
             
             document.getElementById('exibir-execucao').innerHTML += '----------- Início do jogo -----------';
             document.getElementById('exibir-execucao').innerHTML += '<pre>' + campoMinado.Tabuleiro() + '</pre>';
+ // document.getElementById('exibir-execucao').innerHTML += '<pre>' + campoMinado.JogoStatus() + '</pre>';
             
+            document.getElementById('exibir-execucao').innerHTML += '----------- Status: Jogo em Andamento -----------';
+                
+          
+
+            
+            campoMinado.Abrir(6,5);
+            if(campoMinado.JogoStatus()==2){
+                document.getElementById('exibir-execucao').innerHTML += '----------- Status: Derrota -----------';
+
+            }
+            document.getElementById('exibir-execucao').innerHTML += '<pre>' + campoMinado.Tabuleiro() + '</pre>';        
             // Realize sua codificação a partir deste ponto, boa sorte!
+
         </script>
     </body>
 </html>

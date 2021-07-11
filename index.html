@@ -1,20 +1,90 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title></title>
-        <script src="js/campo-minado.js"></script>
-    </head>
-    <body>
-        <div id="exibir-execucao"></div>
 
-        <script>
-            var campoMinado = new CampoMinado();
-            
-            
-            document.getElementById('exibir-execucao').innerHTML += '----------- Início do jogo -----------';
-            document.getElementById('exibir-execucao').innerHTML += '<pre>' + campoMinado.Tabuleiro() + '</pre>';
-            
-            // Realize sua codificação a partir deste ponto, boa sorte!
-        </script>
-    </body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <script src="js/campo-minado.js"></script>
+</head>
+
+<body>
+    <div id="exibir-execucao"></div>
+
+    <script>
+        var campoMinado = new CampoMinado();
+
+
+        document.getElementById('exibir-execucao').innerHTML += '----------- Início do jogo -----------';
+        document.getElementById('exibir-execucao').innerHTML += '<pre>' + campoMinado.Tabuleiro() + '</pre>';
+
+        function verificarBombas(i, j) {
+
+            var contador=0;            
+
+            if (campoMinado.Tabuleiro()[i - 1] !== undefined && campoMinado.Tabuleiro()[i - 1][j - 1] == "-")
+            contador++;
+
+
+            if (campoMinado.Tabuleiro()[i - 1] !== undefined && campoMinado.Tabuleiro()[i - 1][j] == "-")
+            contador++;
+
+            if (campoMinado.Tabuleiro()[i - 1] !== undefined && campoMinado.Tabuleiro()[i - 1][j + 1] == "-")
+            contador++;
+
+            if (campoMinado.Tabuleiro()[i][j - 1] == "-")
+            contador++;
+
+            if (campoMinado.Tabuleiro()[i][j + 1] == "-")
+            contador++
+
+
+            if (campoMinado.Tabuleiro()[i + 1] !== undefined && campoMinado.Tabuleiro()[i + 1][j - 1] == "-")
+            contador++;
+
+            if (campoMinado.Tabuleiro()[i + 1] !== undefined && campoMinado.Tabuleiro()[i + 1][j] == "-")
+            contador++;
+
+            if (campoMinado.Tabuleiro()[i + 1] !== undefined && campoMinado.Tabuleiro()[i + 1][j + 1] == "-")
+                contador++;
+
+
+            if (campoMinado.Tabuleiro()[i][j] == contador.toString())
+            document.getElementById('exibir-execucao').innerHTML += 'Bomba encontrada na casa (' + (i + 1) + ',' + (j + 1) + ')';    
+                
+        };
+
+        for (var i = 0; i < 9; i++) {
+
+            for (var j = 0; i < 9; j++) {
+
+
+                if (campoMinado.JogoStatus() == 0) {
+
+                    verificarBombas(i, j);
+                        document.getElementById('exibir-execucao').innerHTML += 'Abrindo Casa (' + (i + 1) + ',' + (j + 1) + ')';
+
+                    // document.getElementById('exibir-execucao').innerHTML += '<pre>' + campoMinado.Tabuleiro() + '</pre>';
+                }
+                else if (campoMinado.JogoStatus() == 2) {
+
+                    document.getElementById('exibir-execucao').innerHTML += '----------- Status: Derrota -----------';
+                    document.getElementById('exibir-execucao').innerHTML += '<pre>' + campoMinado.Tabuleiro() + '</pre>';
+
+                    break;
+                }
+                else {
+                    document.getElementById('exibir-execucao').innerHTML += '----------- Status: Vitória -----------';
+                    document.getElementById('exibir-execucao').innerHTML += '<pre>' + campoMinado.Tabuleiro() + '</pre>';
+
+                    break;
+
+                }
+
+            }
+        }
+
+    </script>
+</body>
+
 </html>
